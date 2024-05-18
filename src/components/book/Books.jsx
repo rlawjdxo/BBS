@@ -93,7 +93,7 @@ const Books = () => {
             <Button onClick={()=>setPage(page-1)} disabled={page===1}>이전</Button>
             <span className='mx-2'>{page}</span>
             <Button onClick={()=>setPage(page+1)}>다음</Button>
-        </div>
+      </div>
     </div>
   )
 }

@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import {Row, Col, Form, InputGroup, Card, Button} from 'react-bootstrap'
 import {app} from '../firebaseInit'
-import {getAuth, signInWithEmailAndPassword} from 'firebase/auth'
+import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
 
-const Login = () => {
+const Join = () => {
     const navi = useNavigate();
     const [loading, setLoading] = useState(false)
     const auth = getAuth(app);
@@ -26,19 +26,13 @@ const Login = () => {
         if(email ==="" || pass ===""){
             alert("이메일과 비밀번호를 입력하세요!");
         } else {
-            //로그인 체크
+            //이메일가입
             setLoading(true);
-            signInWithEmailAndPassword(auth, email, pass)
+            createUserWithEmailAndPassword(auth, email, pass)
             .then(success => {
-                alert('로그인성공');
+                alert('이메일가입 성공!');
                 setLoading(false);
-                sessionStorage.setItem('email', email);
-                sessionStorage.setItem('uid', success.user.uid);
-                if(sessionStorage.getItem('target')){
-                    navi(sessionStorage.getItem('target'));
-                } else {
-                    navi('/')
-                }
+                navi('/login');
             }) 
             .catch(error => {
                
@@ -73,10 +67,7 @@ const Login = () => {
                             <Form.Control name='pass' type='password' value={pass} onChange={onChange}/>
                         </InputGroup>
                         <div>
-                            <Button className='w-100' variant="dark" type='onSubmit'>로그인</Button>
-                        </div>
-                        <div className='text-end'>
-                            <a href='/Join'>회원가입</a>
+                            <Button className='w-100' variant="dark" type='onSubmit'>회원가입</Button>
                         </div>
                     </form>
                 </Card.Body>
@@ -86,4 +77,5 @@ const Login = () => {
   )
 }
 
-export default Login
+
+export default Join
