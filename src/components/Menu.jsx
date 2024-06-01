@@ -11,6 +11,9 @@ import Locals from './local/Locals';
 import Favorite from './local/Favorite';
 import Join from './user/Join';
 import Mypage from './user/Mypage';
+import ListPage from './bbs/ListPage';
+import InsertPage from './bbs/InsertPage';
+import ReadPage from './bbs/ReadPage';
 
 
 const Menu = () => { 
@@ -41,8 +44,10 @@ const Menu = () => {
                 <>
                 <Nav.Link href="/cart">장바구니</Nav.Link>
                 <Nav.Link href="/favorite">즐겨찾기</Nav.Link>
+                
                 </>
                 }
+                <Nav.Link href="/bbs">게시판</Nav.Link>
                 
               </Nav>
               {sessionStorage.getItem('email') ? 
@@ -67,9 +72,12 @@ const Menu = () => {
           <Route path='/favorite' element={<Favorite/>}/>
           <Route path='/Join' element={<Join/>}/>
           <Route path='/mypage' element={<Mypage/>}/>
+          <Route path='/bbs' element={<ListPage/>}/>
+          <Route path='/bbs/insert' element={<InsertPage/>}/>
+          <Route path='/bbs/read/:id' element={<ReadPage/>}/>
         </Routes>
       </>
-  )
+  );
 }
 
 export default Menu
